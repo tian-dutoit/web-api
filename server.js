@@ -7,9 +7,9 @@ const server = express()
 
 // Middleware
 server.use(bodyParser.json())
+server.use(express.static('public'))
 
 // Routes
-server.use('/users', users)
+server.use('/api/v1/users', users)
 
 module.exports = server
-

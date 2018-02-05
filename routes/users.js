@@ -25,5 +25,10 @@ router.get('/:id', (req, res) => {
     })
 })
 
-module.exports = router
+router.post('/api/v1/users', (req, res) => {
+  const user = req.body
+  db.addUser(user)
+  res.status(200).send()
+})
 
+module.exports = router
