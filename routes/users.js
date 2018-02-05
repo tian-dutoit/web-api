@@ -25,9 +25,15 @@ router.get('/:id', (req, res) => {
     })
 })
 
-router.post('/api/v1/users', (req, res) => {
-  const user = req.body
+router.post('/', (req, res) => {
+  const user = req.body.user
   db.addUser(user)
+    .then(() => {
+      res.redirect('/')
+    })
+    .catch(err => {
+      res.status(500).send('DATABASE ERROR: ' + err.message)
+    })
   res.status(200).send()
 })
 

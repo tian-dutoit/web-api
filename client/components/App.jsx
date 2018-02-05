@@ -7,9 +7,13 @@ class App extends React.Component {
   constructor () {
     super()
     this.state = {
-      users: []
+      users: [],
+      name: '',
+      email: ''
     }
     this.showUsers = this.showUsers.bind(this)
+    this.handleAddUser = this.handleAddUser.bind(this)
+    this.handleSubmit = this.handleSubmit.bind(this)
   }
 
   componentDidMount () {
@@ -23,6 +27,21 @@ class App extends React.Component {
         this.setState({
           users: res.body.users
         })
+      })
+  }
+
+  handleAddUser (evt) {
+    this.setState({
+      [evt.target.name]: evt.target.value
+    })
+  }
+
+  handleSubmit (evt) {
+    request
+      .post('/api/v1/users')
+      .set('Content-Type', 'application/json')
+      .send({user: {name: this.state.name, email: this.state.email}})
+      .then(() => {
       })
   }
 
@@ -45,6 +64,15 @@ class App extends React.Component {
                 </div>)
             })}
           </ul>
+
+          <form>
+            <div>
+              User Name: <input name='name' onChange={this.handleAddUser} />
+              User Email: <input name='email' onChange={this.handleAddUser} />
+            </div>
+            <button type='button' onClick={this.handleSubmit}>Submit</button>
+          </form>
+
         </div>
       </Router>
 
