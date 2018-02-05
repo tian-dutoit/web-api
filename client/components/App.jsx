@@ -39,7 +39,7 @@ class App extends React.Component {
   handleSubmit (evt) {
     request
       .post('/api/v1/users')
-      .set('Content-Type', 'application/json')
+      // .set('Content-Type', 'application/json')
       .send({user: {name: this.state.name, email: this.state.email}})
       .then(() => {
       })
